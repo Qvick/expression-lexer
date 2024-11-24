@@ -1,25 +1,39 @@
+import ExpressionQueue from "./expression-queue.js"
+
 export default class ExpressionState
 {
-    static createDestination(expressionNode, expressionTable)
+    static createDestination(expressionNode, expressionValue)
     {
-        return new ExpressionState(expressionNode, expressionTable)
+        return new ExpressionState(expressionNode, expressionValue, ExpressionQueue.expressionBytes.map(expressionByte => void expressionByte))
     }
 
-    constructor(expressionNode, expressionTable)
+    constructor(expressionNode, expressionValue, expressionTable)
     {
         this.expressionNode = expressionNode
+
+        this.expressionValue = expressionValue
 
         this.expressionTable = expressionTable
     }
 
-    selectRule(expressionValue)
+    get expressionInstance()
     {
-        return this.expressionNode.selectRule(expressionValue ?? 0)
+        return this.expressionNode
     }
 
-    invertRule(expressionValue)
+    get expressionReference()
     {
-        return this.expressionNode.invertRule(expressionValue ?? 0)
+        return this.expressionValue
+    }
+
+    selectRule(expressionValue = 0)
+    {
+        return this.expressionNode.selectRule(expressionValue)
+    }
+
+    invertRule(expressionValue = 0)
+    {
+        return this.expressionNode.invertRule(expressionValue)
     }
 
     equalTo(expressionNode)
