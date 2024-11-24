@@ -38,9 +38,9 @@ export default class ExpressionQueue
 
         const expressionValue = expressionValues.reduceRight(ExpressionNode.composeProduction)
 
-        expressionStates.unshift(ExpressionState.createDestination(expressionRule, ExpressionQueue.expressionBytes.map(expressionByte => void expressionByte)))
+        expressionStates.push(ExpressionState.createDestination(expressionValue, expressionStates.push()))
 
-        expressionStates.unshift(ExpressionState.createDestination(expressionValue, ExpressionQueue.expressionBytes.map(expressionByte => void expressionByte)))
+        expressionStates.push(ExpressionState.createDestination(expressionRule, expressionStates.push()))
 
         for(const expressionState of expressionStates)
         {
@@ -52,7 +52,7 @@ export default class ExpressionQueue
 
                 if(expressionStates.every(expressionState => expressionState.compareTo(expressionNode)))
                 {
-                    expressionStates.push(ExpressionState.createDestination(expressionNode, ExpressionQueue.expressionBytes.map(expressionByte => void expressionByte)))
+                    expressionStates.push(ExpressionState.createDestination(expressionNode, expressionStates.push()))
                 }
 
                 const expressionRoute = expressionStates.find(expressionState => expressionState.equalTo(expressionNode))
