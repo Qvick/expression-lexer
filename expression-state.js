@@ -61,18 +61,8 @@ export default class ExpressionState
         return this.expressionTable.at(expressionByte)
     }
 
-    getDestination(expressionByte)
-    {
-        return +this.expressionValue.at(expressionByte)
-    }
-
     setTransition(expressionByte, expressionState)
     {
         return this.expressionTable.splice(expressionByte, 1, expressionState)
-    }
-
-    setDestination(expressionByte, expressionState)
-    {
-        return this.expressionTable.splice(expressionByte, 1, +expressionState)
     }
 }
