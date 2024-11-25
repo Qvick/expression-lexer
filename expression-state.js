@@ -16,6 +16,16 @@ export default class ExpressionState
         this.expressionTable = expressionTable
     }
 
+    toString()
+    {
+        return this.expressionValue.toString()
+    }
+
+    valueOf()
+    {
+        return this.expressionValue.valueOf()
+    }
+
     selectRule(expressionValue = 0)
     {
         return this.expressionNode.selectRule(expressionValue)
@@ -46,18 +56,23 @@ export default class ExpressionState
         return this.expressionNode.getPartition(expressionRange)
     }
 
-    getDestination(expressionByte)
-    {
-        return this.expressionValue.valueOf(expressionByte)
-    }
-
     getTransition(expressionByte)
     {
         return this.expressionTable.at(expressionByte)
     }
 
+    getDestination(expressionByte)
+    {
+        return +this.expressionValue.at(expressionByte)
+    }
+
     setTransition(expressionByte, expressionState)
     {
         return this.expressionTable.splice(expressionByte, 1, expressionState)
+    }
+
+    setDestination(expressionByte, expressionState)
+    {
+        return this.expressionTable.splice(expressionByte, 1, +expressionState)
     }
 }
