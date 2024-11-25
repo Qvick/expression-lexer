@@ -55,15 +55,15 @@ export default class ExpressionQueue
                     expressionStates.push(ExpressionState.createDestination(expressionNode, expressionStates.push()))
                 }
 
-                const expressionRoute = expressionStates.find(expressionState => expressionState.equalTo(expressionNode))
+                const expressionInstance = expressionStates.find(expressionState => expressionState.equalTo(expressionNode))
 
-                if(expressionRoute)
+                if(expressionInstance)
                 {
                     const expressionBytes = ExpressionQueue.expressionBytes.filter(expressionByte => expressionRange.includesValue(expressionByte))
 
                     for(const expressionByte of expressionBytes)
                     {
-                        expressionState.setTransition(expressionByte, expressionRoute)
+                        expressionState.setTransition(expressionByte, expressionInstance)
                     }
                 }
             }
