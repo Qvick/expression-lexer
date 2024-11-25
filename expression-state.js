@@ -16,16 +16,6 @@ export default class ExpressionState
         this.expressionTable = expressionTable
     }
 
-    get expressionInstance()
-    {
-        return this.expressionNode
-    }
-
-    get expressionReference()
-    {
-        return this.expressionValue
-    }
-
     selectRule(expressionValue = 0)
     {
         return this.expressionNode.selectRule(expressionValue)
@@ -54,6 +44,11 @@ export default class ExpressionState
     getPartition(expressionRange)
     {
         return this.expressionNode.getPartition(expressionRange)
+    }
+
+    getDestination(expressionByte)
+    {
+        return this.expressionValue.valueOf(expressionByte)
     }
 
     getTransition(expressionByte)
